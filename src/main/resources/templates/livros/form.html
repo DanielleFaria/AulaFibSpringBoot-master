@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  	layout:decorate="layout">
+<head>
+	<meta charset="UTF-8" />
+	<title>Livros</title>
+		<!-- Bootstrap -->
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
+	<link rel="stylesheet" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.css}" />
+</head>
+<body>
+ 	<div class="container">
+    <div class="col-md-12" style="margin:40px">
+			<div class="col-md-9">         
+      </div>
+      <div class="col-md-1">
+			  <h1> <a href="#" th:href="@{/livros/list}">  <span class="glyphicon glyphicon glyphicon-book" aria-hidden="true"> </span> </a></h1>
+			</div>
+			<div class="col-md-1">
+			  <h1> <a href="#" th:href="@{/autores/list}">  <span class="glyphicon glyphicon-user" aria-hidden="true"> </span></a> </h1>
+			</div>
+		</div>
+    <div class="col-md-12">
+      <div class="panel panel-info" style="margin-left:100px; margin-right:100px;">
+        <div class="panel-heading">
+          Cadastro de Livros
+        </div>
+        <div class="panel-body">
+          <div class="row">
+          
+            <div class="col-md-12" style="padding: 10px;">
+              <form method="post" action="#" th:action="@{/livros/gravar}" th:object="${livro}">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-md-12">
+                  <label>Nome:</label>
+                  <input type="text" th:field="*{nome}" class="form-control">
+                  <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Error</span>
+                </div>
+                <div class="col-md-12" style="padding: 10px;">
+                   <label>	Quantidade Páginas:</label> 
+                  <input type="text" th:field="*{quantidadePaginas}" class="form-control">
+                  <span  th:if="${#fields.hasErrors('quantidadePaginas')}" th:errors="*{quantidadePaginas}">Error</span><br>
+                </div>
+                <div class="col-md-12" style="padding: 10px;">
+                  <label>Autor:</label>
+                  <select th:field="*{autor}" class="form-control">
+                    <option value="">Selecione o Autor</option>
+                    <option th:each="autor : ${listaAutores}" th:value="${autor.id}" th:text="${autor.nome} " selected="selected"></option>
+                  </select>
+                </div>
+                <div class="col-md-12" style="padding: 10px;"> 
+                  <input type="submit">               
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+		
+    
+  </div>
+
+  <script type="text/javascript" th:src="@{/webjars/jquery/3.1.1/jquery.min.js}" ></script>
+	<script type="text/javascript" th:src="@{/webjars/jquery-ui/1.12.1/jquery-ui.js}" ></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}" ></script>
+
+</body>
+</html>
